@@ -1,23 +1,30 @@
 #include "FoodOrganizer.h"
 
-FoodOrganizer::FoodOrganizer() { this->objects.reserve(20); }
+FoodOrganizer::FoodOrganizer() { this->apples.reserve(20); }
 
-void FoodOrganizer::init() {}
+void FoodOrganizer::initRand(int no) {
+  //---generate random numbers
+  std::mt19937 mt(rd());
+  // TODO: change arguments to depend on window size
+  std::uniform_int_distribution<> randX(0, 683);
+  std::uniform_int_distribution<> randY(0, 384);
+  //---
+  for (int i = 0; i < no; ++i)
+    this->addApple(sf::Vector2f(sf::Vector2f(randX(mt), randY(mt))));
+}
 
 void FoodOrganizer::update() {}
 
 void FoodOrganizer::draw(sf::RenderWindow &window) {
-  for (auto i : objects) {
-    i->draw(window);
+  for (auto i : apples) {
+    i.draw(window);
   }
 }
 
 void FoodOrganizer::release() {}
 
-void FoodOrganizer::add(Food *f) { this->objects.push_back(f); }
-
-void FoodOrganizer::add2(sf::Vector2f position) {
-  objects2.emplace_back(position);
+void FoodOrganizer::addApple(sf::Vector2f position) {
+  apples.emplace_back(position);
 }
 
 void FoodOrganizer::del() {}
@@ -31,11 +38,11 @@ void FoodOrganizer::detectCollision(sf::CircleShape &player) {
   sf::Vector2f objPos;
   float objRadius, temp2, temp3;
 
-  auto it = objects.begin();
-  while (it != objects.end()) {
-    objPos = (*it)->getPosition();
-    if ((*it)->getType() == "Apple") {
-      objRadius = (*it)->getUnique();
+  auto it = apples.begin();
+  while (it != apples.end()) {
+    objPos = (*it).getPosition();
+    if ((*it).getType() == "Apple") {
+      objRadius = (*it).getUnique();
       objPos.x += objRadius;
       objPos.y += objRadius;
 
@@ -48,9 +55,9 @@ void FoodOrganizer::detectCollision(sf::CircleShape &player) {
       // true- collision detected
       if (temp2 >= temp3) {
         // i->setPosition(sf::Vector2f(0., 0.));
-        std::swap(*it, objects.back()); // swap with the last element
-        if (objects.size() != 0)
-          objects.pop_back(); // delete last element
+        std::swap(*it, apples.back()); // swap with the last element
+        if (apples.size() != 0)
+          apples.pop_back(); // delete last element
         --it; // cofam bo zamienilem z ostatnim elementem, tez trzeba go
               // sprawdzic
       }

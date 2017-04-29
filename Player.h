@@ -21,7 +21,9 @@ public:
 	bool update(float dt);
 	void draw(sf::RenderWindow &window);
 	void release();
+	void move(sf::Vector2f v);
 
 	sf::Vector2f position() { return shape.getPosition(); }
+	float getSpeed(){return speed;}
 };
 #endif

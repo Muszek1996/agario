@@ -7,10 +7,9 @@
 
 class FoodOrganizer {
 private:
-//FIXME: wywalic objects na wektorach i pozmeniac wszedzie te wektory
-  //std::vector<Food*> objects; 
-	std::vector<Apple> objects; /**< Stores Food objects */ 
+	std::vector<Apple> apples; /**< Stores Apple objects */ 
 
+	std::random_device rd; /**< to generate random position */
 public:
 
 	/**
@@ -19,10 +18,10 @@ public:
 	FoodOrganizer();
 
 	/**
-	*	TODO: FoodOrganizer.init()
-	* Tworzenie poczatkowej ilosci jedzenia
+	* Initialise with some amount of Food
+	* @param no number of Food to add
 	*/
-	void init();
+	void initRand(int no);
 
 	/**
 	*	TODO: FoodOrganizer.update()
@@ -39,15 +38,11 @@ public:
 	//TODO: FoodOrganizer.release()
 	void release();
 
-	// TODO: nie przesylac obiektu do funkcji, 
-	// niech funkcja sama zajmie sie tworzeniem obiektu nowego
 	/**
-	* Adds new Food object to the stored objects.
-	* @param f pointer to the Food object, that must be created before
+	* Adds new Apple object to the stored objects.
+	* @param position of the new object
 	*/
-	void add(Food* f);
-
-	void add2(sf::Vector2f position);
+	void addApple(sf::Vector2f position);
 
 	/**
 	*	TODO: FoodOrganizer.del()
