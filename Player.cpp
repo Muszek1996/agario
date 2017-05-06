@@ -18,3 +18,5 @@ void Player::draw(sf::RenderWindow &window) { window.draw(this->shape); }
 void Player::release() {}
 
 void Player::move(sf::Vector2f v) { shape.move(v); }
+
+sf::CircleShape &Player::getShape() { return this->shape; }

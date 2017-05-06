@@ -15,6 +15,8 @@ void Apple::setPosition(sf::Vector2f v) { this->shape.setPosition(v); }
 
 sf::Vector2f Apple::getPosition() { return this->shape.getPosition(); }
 
-float Apple::getUnique() { return this->radius; }
+float Apple::getRadius() { return this->radius; }
 
 std::string Apple::getType() { return this->type; }
+
+sf::CircleShape &Apple::getShape() {return this->shape;}

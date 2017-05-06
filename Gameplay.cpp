@@ -59,7 +59,7 @@ bool Gameplay::update(float dt) {
   mCamPosition.y += mCamVelocity.y * dt;
   //----
 
-  // FIXME: foodOrg.detectCollision(kolo);
+  foodOrg.detectCollision(player.getShape());
 
   return true;
 }
